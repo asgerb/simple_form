@@ -497,8 +497,8 @@ module SimpleForm
           conditions = reflection.options[:conditions]
           conditions = object.instance_exec(&conditions) if conditions.respond_to?(:call)
 
-          relation = relation.where(conditions) if relation.respond_to?(:where)
-          relation = relation.order(order) if relation.respond_to?(:order)
+          relation = relation.where(conditions) if relation.respond_to?(:where) && conditions.present?
+          relation = relation.order(order) if relation.respond_to?(:order) && order.present?
         end
 
         relation
